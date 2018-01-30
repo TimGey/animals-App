@@ -121,26 +121,31 @@ export class HomePage {
 
   //deviner l'animall en fonction du crie
   clickAnimal(animalName) {
+
     if (this.currentAnimal) {
+
       if (animalName != this.currentAnimal.title) {
         this.result = " Essaie encore";
         this.toastCtrl.create({
           message: " Essaie encore",
           duration: 2000,
-          position: 'middel'
+          position: 'middle'
         }).present();
 
         let buzzer = new Audio();
         buzzer.src = 'assets/sounds/buzzer.mp3';
         buzzer.load();
         buzzer.play();
+
       } else {
         this.result = " Bravo tu as trouvé";
+
         this.toastCtrl.create({
           message: " Bravo tu as trouvé",
           duration: 2000,
-          position: 'middel'
+          position: 'middle'
         }).present();
+
         let bravo = new Audio();
         bravo.src = 'assets/sounds/applause.mp3';
         bravo.load();
@@ -150,3 +155,4 @@ export class HomePage {
     }
   }
 }
+
