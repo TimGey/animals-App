@@ -7,6 +7,8 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+
+
   animals = [
     {
       'title': 'Vache',
@@ -73,17 +75,42 @@ export class HomePage {
     }
   ];
 
+  private currentPosition: number;
+
 
   constructor(public navCtrl: NavController) {
 
   }
-/**
- * choix aléatoir d'un animal
- */
-pickAnimalPosition(){
-  let pos = Math.floor(Math.random()*this.animals.length);
-  return pos;
-}
+  /**
+   * choix aléatoir d'un animal
+   */
+  pickAnimalPosition() {
+    let pos;
+    if (!this.currentPosition) {
+      pos = Math.floor(Math.random() * this.animals.length);
+    } else {
+      pos = this.currentPosition;
+    }
 
+    return pos;
+  }
+
+  /**
+   * Lecture d'un son
+   */
+  playSound() {
+    //choix d'un annimal
+    this.currentPosition = this.pickAnimalPosition();
+    let choosenAnimal = this.animals[this.currentPosition];
+
+    //Chargement du son
+
+    let audio = new Audio();
+    audio.src = 'assets' + choosenAnimal.file;
+    audio.load();
+
+    // lecture du son
+    audio.play();
+  }
 
 }
