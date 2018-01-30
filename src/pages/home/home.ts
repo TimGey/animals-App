@@ -76,7 +76,7 @@ export class HomePage {
   ];
 
   public showReorder:boolean = false;
-  private currentPosition: number;
+  private currentAnimal;
   public result: string;
 
   constructor(public navCtrl: NavController) {
@@ -85,15 +85,17 @@ export class HomePage {
   /**
    * choix aléatoir d'un animal
    */
-  pickAnimalPosition() {
+  pickAnimal() {
     let pos;
-    if (!this.currentPosition) {
+    let animal;
+    if (!this.currentAnimal) {
       pos = Math.floor(Math.random() * this.animals.length);
+      animal=this.animals[pos];
     } else {
-      pos = this.currentPosition;
+      animal = this.currentAnimal;
     }
 
-    return pos;
+    return animal;
   }
 
   /**
@@ -103,13 +105,13 @@ export class HomePage {
     //choix d'un annimal
     this.result = null;
 
-    this.currentPosition = this.pickAnimalPosition();
-    let choosenAnimal = this.animals[this.currentPosition];
+    this.currentAnimal = this.pickAnimal();
+
 
     //Chargement du son
 
     let audio = new Audio();
-    audio.src = 'assets' + choosenAnimal.file;
+    audio.src = 'assets' + this.currentAnimal.file;
     audio.load();
 
     // lecture du son
@@ -117,9 +119,9 @@ export class HomePage {
   }
 
   //deviner l'animall en fonction du crie
-  clickAnimal(pos) {
-    if (this.currentPosition) {
-      if (pos != this.currentPosition) {
+  clickAnimal(animalName) {
+    if (this.currentAnimal) {
+      if (animalName != this.currentAnimal.title) {
         this.result = " Essaie encore";
         let buzzer = new Audio();
         buzzer.src = 'assets/sounds/buzzer.mp3';
@@ -131,7 +133,7 @@ export class HomePage {
         bravo.src = 'assets/sounds/applause.mp3';
         bravo.load();
         bravo.play();
-        this.currentPosition = null;
+        this.currentAnimal = null;
       }
     }
   }
