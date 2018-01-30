@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -75,11 +76,11 @@ export class HomePage {
     }
   ];
 
-  public showReorder:boolean = false;
+  public showReorder: boolean = false;
   private currentAnimal;
   public result: string;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
 
   }
   /**
@@ -90,7 +91,7 @@ export class HomePage {
     let animal;
     if (!this.currentAnimal) {
       pos = Math.floor(Math.random() * this.animals.length);
-      animal=this.animals[pos];
+      animal = this.animals[pos];
     } else {
       animal = this.currentAnimal;
     }
@@ -123,12 +124,23 @@ export class HomePage {
     if (this.currentAnimal) {
       if (animalName != this.currentAnimal.title) {
         this.result = " Essaie encore";
+        this.toastCtrl.create({
+          message: " Essaie encore",
+          duration: 2000,
+          position: 'middel'
+        }).present();
+
         let buzzer = new Audio();
         buzzer.src = 'assets/sounds/buzzer.mp3';
         buzzer.load();
         buzzer.play();
       } else {
         this.result = " Bravo tu as trouvé";
+        this.toastCtrl.create({
+          message: " Bravo tu as trouvé",
+          duration: 2000,
+          position: 'middel'
+        }).present();
         let bravo = new Audio();
         bravo.src = 'assets/sounds/applause.mp3';
         bravo.load();
@@ -137,5 +149,4 @@ export class HomePage {
       }
     }
   }
-
 }
