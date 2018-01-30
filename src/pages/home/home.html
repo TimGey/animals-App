@@ -8,17 +8,22 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item (click)='playSound()' *ngFor='let animal of animals; let pos= index'>
+
+    <ion-item *ngFor='let animal of animals; let pos= index' (click)='clickAnimal(pos)'>
+     
       <h2>{{ animal.title}}</h2>
+     
       <ion-thumbnail item-left>
-        <img src="/assets/{{animal.image}}"/>
+        <img src="/assets/{{animal.image}}" />
       </ion-thumbnail>
+
     </ion-item>
 
   </ion-list>
 </ion-content>
 
 <ion-footer padding>
+  <ion-title class='message'>{{result}}</ion-title>
   <button ion-button full round color='secondary' (click)='playSound()'>
     Jouer le son &nbsp;
     <ion-icon name="musical-notes"></ion-icon>

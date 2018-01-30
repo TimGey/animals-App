@@ -76,7 +76,7 @@ export class HomePage {
   ];
 
   private currentPosition: number;
-
+  public result: string;
 
   constructor(public navCtrl: NavController) {
 
@@ -100,6 +100,8 @@ export class HomePage {
    */
   playSound() {
     //choix d'un annimal
+    this.result = null;
+
     this.currentPosition = this.pickAnimalPosition();
     let choosenAnimal = this.animals[this.currentPosition];
 
@@ -113,4 +115,15 @@ export class HomePage {
     audio.play();
   }
 
+  //deviner l'animall en fonction du crie
+  clickAnimal(pos) {
+    if (this.currentPosition) {
+      if (pos != this.currentPosition) {
+        this.result = " Essaie encore";
+      } else {
+        this.result = " Bravo Vous avez Trouvé";
+        this.currentPosition = null;
+      }
+    }
+  }
 }
