@@ -3,22 +3,27 @@
     <ion-title>
       Animals - Apps
     </ion-title>
+    <ion-buttons end >
+      <button ion-button (click)="showReorder = ! showReorder">
+        <ion-icon name='funnel'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
+    <ion-item-group [reorder]="showReorder" (ionItemReorder)="$event.applyTo(animals)">
+      <ion-item *ngFor='let animal of animals; let pos= index' (click)='clickAnimal(pos)'>
 
-    <ion-item *ngFor='let animal of animals; let pos= index' (click)='clickAnimal(pos)'>
-     
-      <h2>{{ animal.title}}</h2>
-     
-      <ion-thumbnail item-left>
-        <img src="/assets/{{animal.image}}" />
-      </ion-thumbnail>
+        <h2>{{ animal.title}}</h2>
 
-    </ion-item>
+        <ion-thumbnail item-left>
+          <img src="/assets/{{animal.image}}" />
+        </ion-thumbnail>
 
+      </ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>
 

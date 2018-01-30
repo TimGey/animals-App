@@ -75,6 +75,7 @@ export class HomePage {
     }
   ];
 
+  public showReorder:boolean = false;
   private currentPosition: number;
   public result: string;
 
@@ -120,10 +121,19 @@ export class HomePage {
     if (this.currentPosition) {
       if (pos != this.currentPosition) {
         this.result = " Essaie encore";
+        let buzzer = new Audio();
+        buzzer.src = 'assets/sounds/buzzer.mp3';
+        buzzer.load();
+        buzzer.play();
       } else {
-        this.result = " Bravo Vous avez Trouvé";
+        this.result = " Bravo tu as trouvé";
+        let bravo = new Audio();
+        bravo.src = 'assets/sounds/applause.mp3';
+        bravo.load();
+        bravo.play();
         this.currentPosition = null;
       }
     }
   }
+
 }
