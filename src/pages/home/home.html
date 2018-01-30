@@ -7,7 +7,15 @@
 </ion-header>
 
 <ion-content padding>
-  
+  <ion-list>
+    <ion-item (click)='playSound()' *ngFor='let animal of animals; let pos= index'>
+      <h2>{{ animal.title}}</h2>
+      <ion-thumbnail item-left>
+        <img src="/assets/{{animal.image}}"/>
+      </ion-thumbnail>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
 
 <ion-footer padding>
