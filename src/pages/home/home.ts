@@ -2,6 +2,7 @@ import { DetailsPage } from './../details/details';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -81,7 +82,7 @@ export class HomePage {
   private currentAnimal;
   public result: string;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
+  constructor(public events: Events, public navCtrl: NavController, public toastCtrl: ToastController) {
 
   }
   /**
@@ -155,8 +156,23 @@ export class HomePage {
       }
     }
   }
+  /**
+   * 
+   * @param animal 
+   */
   goToDetails(animal) {
-    this.navCtrl.push(DetailsPage,{data:animal});
+    this.navCtrl.push(DetailsPage, { data: animal });
+  }
+
+  ionViewDidLoad() {
+    this.events.subscribe('event.data.add', (data) => {
+
+      this.toastCtrl.create({
+        message: data,
+        duration: 2000,
+        position: 'top'
+      }).present();
+    });
   }
 }
 
