@@ -17,7 +17,7 @@
       <ion-item *ngFor='let animal of animals; let pos= index' (click)='clickAnimal(animal.title)'>
 
         <h2>{{ animal.title}}</h2>
-
+        <ion-icon (click)="goToDetails(animal)" name="information-circle" item-right></ion-icon>
         <ion-thumbnail item-left>
           <img src="assets/{{animal.image}}" />
         </ion-thumbnail>
