@@ -1,3 +1,4 @@
+import { DetailsPage } from './../details/details';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
@@ -153,6 +154,9 @@ export class HomePage {
         this.currentAnimal = null;
       }
     }
+  }
+  goToDetails(animal) {
+    this.navCtrl.push(DetailsPage,{data:animal});
   }
 }
 
